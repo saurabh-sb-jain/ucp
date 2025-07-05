@@ -3,6 +3,10 @@
 Tool to fast copy large regular and block device files.
 Typically useful when one has to copy file of size 100s of GB or TB+ over parallel NFS.
 
+Performance gain comes from:
+ - parallelizing read with write via the use of Linux kernel asynchronous i/o interface io_uring
+ - direct i/o
+
 Dependency: Install liburing
 
 Compile: gcc -O2 -o ucp ucp.c -luring
@@ -28,7 +32,7 @@ Fri Jul  1 08:38:43 PM UTC 2025
 Fri Jul  1 09:13:31 PM UTC 2025
 
 3) ucp - Time taken: = 7m 51s = 471 sec (2534 MiB/s)
-$ date; ./ucp -n 16 -s 1073741824 /mnt/cl1/training/model405b.tar /mnt/cl1/backup/model405b.tar; date
+$ date; ./ucp -n 4 -s 1073741824 /mnt/cl1/training/model405b.tar /mnt/cl1/backup/model405b.tar; date
 Sat Jul  1 12:18:22 AM UTC 2025
 Sat Jul  1 12:26:13 AM UTC 2025
 
