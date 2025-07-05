@@ -112,9 +112,9 @@ main(int argc, char **argv) {
     src = argv[optind];
     dst = argv[optind + 1];
 
-	if (oper.bufsize < DFLT_BUF_SZ) { oper.bufsize = DFLT_BUF_SZ; }
+    if (oper.bufsize < DFLT_BUF_SZ) { oper.bufsize = DFLT_BUF_SZ; }
     if (oper.num_bufs == 0) { oper.num_bufs = DFLT_NUM_BUFS; }
-	if (oper.num_bufs > DFLT_NUM_BUFS) { oper.queue_sz = oper.num_bufs; }
+    if (oper.num_bufs > DFLT_NUM_BUFS) { oper.queue_sz = oper.num_bufs; }
 
     oper.in_fd = open(src, O_RDONLY | O_DIRECT);
     if (oper.in_fd < 0) {
@@ -157,7 +157,7 @@ main(int argc, char **argv) {
     	if (rc != 0 || !oper.ud[i].buffer) {
             perror("buffer malloc error");
             goto quit;
-	    }
+        }
 	    oper.ud[i].status = true;
 	    oper.ud[i].index = i;
 	    oper.ud[i].done = false;
@@ -235,7 +235,7 @@ main(int argc, char **argv) {
                 DBG_PRINTF("Write: buf:%d offset:%lu len:%ld\n", i,
                            oper.ud[i].offset, oper.ud[i].len);
             }
-	    }
+        }
 
         rc = io_uring_wait_cqe(&ring, &cqe);
         if (rc < 0) {
